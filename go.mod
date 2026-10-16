@@ -1,3 +1,3 @@
-module github.com/Garden-Studio/gotailwind/v4
+module github.com/Garden-Studio/gowind/v4
 
 go 1.24

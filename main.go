@@ -1,6 +1,6 @@
-// Command gotailwind runs the standalone Tailwind CSS CLI of the release this
+// Command gowind runs the standalone Tailwind CSS CLI of the release this
 // module version names, so a Go project pins Tailwind in go.mod and runs it
-// with `go tool gotailwind` without Node.
+// with `go tool gowind` without Node.
 //
 // The first run downloads the release's binary for this platform from
 // Tailwind's GitHub release, checks it against the SHA-256 the release
@@ -24,11 +24,11 @@ import (
 func main() {
 	binary, err := install()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "gotailwind:", err)
+		fmt.Fprintln(os.Stderr, "gowind:", err)
 		os.Exit(1)
 	}
 	if err := run(binary, os.Args[1:]); err != nil {
-		fmt.Fprintln(os.Stderr, "gotailwind:", err)
+		fmt.Fprintln(os.Stderr, "gowind:", err)
 		os.Exit(1)
 	}
 }
@@ -90,16 +90,16 @@ func musl() bool {
 	return len(matches) > 0
 }
 
-// cacheDir is GOTAILWIND_CACHE, or gotailwind under the user cache.
+// cacheDir is GOWIND_CACHE, or gowind under the user cache.
 func cacheDir() (string, error) {
-	if dir := os.Getenv("GOTAILWIND_CACHE"); dir != "" {
+	if dir := os.Getenv("GOWIND_CACHE"); dir != "" {
 		return dir, nil
 	}
 	base, err := os.UserCacheDir()
 	if err != nil {
-		return "", fmt.Errorf("find a cache directory (set GOTAILWIND_CACHE): %w", err)
+		return "", fmt.Errorf("find a cache directory (set GOWIND_CACHE): %w", err)
 	}
-	return filepath.Join(base, "gotailwind"), nil
+	return filepath.Join(base, "gowind"), nil
 }
 
 func releaseURL(asset string) string {
